@@ -39,9 +39,9 @@ class APP{
 			this.customPipelineModule.xrModule,
 		])
 
-	XR.run({
-		canvas: document.getElementById('canvas')
-	})
+		XR.run({
+			canvas: document.getElementById('canvas')
+		})
 		
     }
 

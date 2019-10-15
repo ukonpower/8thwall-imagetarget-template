@@ -14,16 +14,16 @@ export class CustomPipelineModule{
 
 	constructor(){
 
-this.xrModule = {
-	name: 'custom module',
-	onStart: this.onStart.bind( this ),
-	onUpdate: this.update.bind( this ),
-	listeners: [
-		{ event: 'reality.imagefound', process: this.showTarget.bind( this ) },
-		{ event: 'reality.imageupdated', process: this.udpateTarget.bind( this ) },
-		{ event: 'reality.imagelost', process: this.hideTarget.bind( this ) },
-	],
-}
+		this.xrModule = {
+			name: 'custom module',
+			onStart: this.onStart.bind( this ),
+			onUpdate: this.update.bind( this ),
+			listeners: [
+				{ event: 'reality.imagefound', process: this.showTarget.bind( this ) },
+				{ event: 'reality.imageupdated', process: this.udpateTarget.bind( this ) },
+				{ event: 'reality.imagelost', process: this.hideTarget.bind( this ) },
+			],
+		}
 
 	}
 
