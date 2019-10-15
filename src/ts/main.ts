@@ -28,20 +28,20 @@ class APP{
 
     private init() {
 
-        XR.addCameraPipelineModules([
-            XR.GlTextureRenderer.pipelineModule(),
-            XR.Threejs.pipelineModule(),
-            XR.XrController.pipelineModule(),
-            XRExtras.AlmostThere.pipelineModule(),
-            XRExtras.FullWindowCanvas.pipelineModule(),
-            XRExtras.Loading.pipelineModule(),
-            XRExtras.RuntimeError.pipelineModule(),
-            this.customPipelineModule.xrModule,
-        ])
+		XR.addCameraPipelineModules([
+			XR.GlTextureRenderer.pipelineModule(),
+			XR.Threejs.pipelineModule(),
+			XR.XrController.pipelineModule(),
+			XRExtras.AlmostThere.pipelineModule(),
+			XRExtras.FullWindowCanvas.pipelineModule(),
+			XRExtras.Loading.pipelineModule(),
+			XRExtras.RuntimeError.pipelineModule(),
+			this.customPipelineModule.xrModule,
+		])
 
-        XR.run({
-            canvas: document.getElementById('canvas')
-		})
+	XR.run({
+		canvas: document.getElementById('canvas')
+	})
 		
     }
 
@@ -50,5 +50,5 @@ class APP{
 window.addEventListener('load',()=>{
 
 	let app = new APP();
-	
+
 });

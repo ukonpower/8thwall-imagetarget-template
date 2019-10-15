@@ -14,21 +14,22 @@ export class CustomPipelineModule{
 
 	constructor(){
 
-		this.xrModule = {
-			name: 'custom module',
-			onStart: this.onStart.bind( this ),
-			onUpdate: this.update.bind( this ),
-			listeners: [
-				{ event: 'reality.imagefound', process: this.showTarget.bind( this ) },
-				{ event: 'reality.imageupdated', process: this.udpateTarget.bind( this ) },
-				{ event: 'reality.imagelost', process: this.hideTarget.bind( this ) },
-			],
-		}
+this.xrModule = {
+	name: 'custom module',
+	onStart: this.onStart.bind( this ),
+	onUpdate: this.update.bind( this ),
+	listeners: [
+		{ event: 'reality.imagefound', process: this.showTarget.bind( this ) },
+		{ event: 'reality.imageupdated', process: this.udpateTarget.bind( this ) },
+		{ event: 'reality.imagelost', process: this.hideTarget.bind( this ) },
+	],
+}
 
 	}
 
 	private onStart(){
 
+		//XRからThree.jsのシーンやカメラを取得
 		let {scene, camera} = XR.Threejs.xrScene();
 				
 		this.scene = scene;
@@ -46,6 +47,7 @@ export class CustomPipelineModule{
 
 	private initScene(){
 
+		//ライトの作成
 		let light = new THREE.AmbientLight();
 		this.scene.add( light );
 
@@ -53,6 +55,7 @@ export class CustomPipelineModule{
 		dLight.position.set( 5, 5, 5 );
 		this.scene.add( dLight );
 
+		//Boxの作成
 		let geo = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
 		let mat = new THREE.MeshStandardMaterial({ color: new THREE.Color( 0xdddddd )});
 		let box = new THREE.Mesh( geo, mat );
@@ -74,6 +77,7 @@ export class CustomPipelineModule{
 
 		console.log( 'show' );
 		
+		//マーカーが表示されたらBoxも表示
 		this.obj.visible = true;
 		
 		this.applyTransforms( args.detail );
@@ -92,6 +96,7 @@ export class CustomPipelineModule{
 
 		console.log( 'hide' );
 
+		//マーカーを見失ったらBoxを非表示
 		this.obj.visible = false;
 
 	}
