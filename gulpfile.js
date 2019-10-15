@@ -54,7 +54,8 @@ gulp.task('browser-sync',function(){
             baseDir: "public",
             index: "index.html"
         },
-        open: true
+        open: true,
+        https: true,
     });
 });
 

@@ -1,28 +1,54 @@
-import * as ORE from 'ore-three-ts';
-import MainScene from './MainScene';
+import * as THREE from 'three';
+window.THREE = THREE;
+
+import { CustomPipelineModule } from './CustomPipelineModule';
+
+declare var XR;
+declare var XRExtras;
 
 class APP{
-	private canvas: any;
-	private controller: ORE.Controller;
-	private scene: MainScene;
 
-	constructor(){
+	private customPipelineModule: CustomPipelineModule;
+
+	constructor() {
+
+		this.customPipelineModule = new CustomPipelineModule();
 		
-		this.canvas = document.querySelector("#canvas");
 
-		this.controller = new ORE.Controller({
+        if( XR ){
 
-			canvas: this.canvas,
-			retina: true,
+			this.init();
+			
+        }else{
 
+			window.addEventListener('xrloaded', this.init.bind(this));
+			
+        }
+    }
+
+    private init() {
+
+        XR.addCameraPipelineModules([
+            XR.GlTextureRenderer.pipelineModule(),
+            XR.Threejs.pipelineModule(),
+            XR.XrController.pipelineModule(),
+            XRExtras.AlmostThere.pipelineModule(),
+            XRExtras.FullWindowCanvas.pipelineModule(),
+            XRExtras.Loading.pipelineModule(),
+            XRExtras.RuntimeError.pipelineModule(),
+            this.customPipelineModule.xrModule,
+        ])
+
+        XR.run({
+            canvas: document.getElementById('canvas')
 		})
-
-		this.controller.bindScene( new MainScene() );
-
-	}
+		
+    }
 
 }
 
 window.addEventListener('load',()=>{
+
 	let app = new APP();
+	
 });
